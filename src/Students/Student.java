@@ -1,5 +1,5 @@
 package Students;
-123231
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,6 +14,7 @@ import Interfaces.MenuAction;
 import Main.Book;
 import Main.Course;
 import Main.Faculty;
+import Main.Journal;
 import Main.Mark;
 import Main.UniSystem;
 import Main.User;
@@ -24,7 +25,7 @@ public class Student extends User{
     private double feeUchebny;
     private double gpa;
     private Vector<Course> takingCourses;
-    private HashMap marks = new HashMap<Course, Mark>();
+    private HashMap marks = new HashMap<Course, Journal>();
     private Vector<Book> books;
     private Vector<Book> takenBooks;
     private List<LibrarySubscription> librarySubscriptions;
@@ -57,6 +58,105 @@ public class Student extends User{
         this.takenBooks = takenBooks;
         this.librarySubscriptions = librarySubscriptions;
     }
+    
+    //operations
+    public void openJournal() {
+    	System.out.println("OK, for which discipline do you want to see the journal");
+    	String discipline = scan();
+//    	if(UniSystem.db)
+    }
+
+    
+    public void viewTranscript() {
+    	
+    }
+    public void downloadTranscript() {
+    	
+    }
+
+    
+    public void viewOrganizations() {
+    	
+    }
+
+    
+    public void rateTeachers() {
+    	
+    }
+
+
+    public void viewAttendance() {
+    	
+    }
+
+    public void signAttendance() {
+    	
+    }
+
+    
+    
+    public void openOrganizations() {
+    	
+    }
+
+    public void joinOrganization() {
+    }
+
+    public void quitOrganization() {
+    }
+
+    
+    public void viewCourses() {
+    	System.out.println("Hello");
+    	viewMenu();
+    }
+    public void viewCourseInfo() {
+    	
+    }
+    public void registerForCourse() {
+    
+    }
+    
+    
+    public void openLibrary() {
+    	
+    }
+
+    
+    public void viewMenu() {
+    	System.out.println("Choose option: ");
+    	for(int i = 0;i < menu.length;i++) {
+    		System.out.println(i+1+") " + menu[i].actionName());
+    	}
+    	option = Integer.parseInt(scan())-1;
+    	if(!(option >= 0 && option < menu.length)) {
+    		System.out.println("Wrong Data");
+    		viewMenu();
+    	}
+    	menu[option].action();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     //get,set
     public Faculty getFaculty() {
@@ -108,78 +208,7 @@ public class Student extends User{
         this.librarySubscriptions = librarySubscriptions;
     }
     
-    //operations
-    public void openJournal() {
-    	
-    }
-    public void viewTranscript() {
-    	
-    }
 
-    public void downloadTranscript() {
-    	
-    }
-
-    public void viewOrganizations() {
-    	
-    }
-
-    public void rateTeachers() {
-    	
-    }
-
-
-    public void viewAttendance() {
-    	
-    }
-
-    public void signAttendance() {
-    	
-    }
-
-    
-    
-    public void openOrganizations() {
-    	
-    }
-
-    public void joinOrganization() {
-    }
-
-    public void quitOrganization() {
-    }
-
-    
-    public void viewCourses() {
-    	System.out.println("Hello");
-    	try {
-			viewMenu();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    public void viewCourseInfo() {
-    	
-    }
-    public void registerForCourse() {
-    
-    }
-    
-    
-    public void openLibrary() {
-    	
-    }
-
-    
-    public void viewMenu() throws IOException {
-    	System.out.println("Choose option: ");
-    	for(int i = 0;i < menu.length;i++) {
-    		System.out.println(i+1+") " + menu[i].actionName());
-    	}
-    	option = bf.read() - 49;
-    	menu[option].action();
-    }
  }
 
 //z_svanov@kbtu.kz

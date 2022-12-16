@@ -1,9 +1,5 @@
 package Main;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
 public class UniSystem {
 	public static DataBase db;
 	public static User currentUser;
@@ -12,9 +8,8 @@ public class UniSystem {
 		db = new DataBase();
 	}
 	
-	public void run() throws IOException {
+	public void run() {
 		currentUser = new User();
-		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
 		currentUser.login();
 		run();
 	}

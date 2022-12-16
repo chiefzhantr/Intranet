@@ -3,6 +3,7 @@ package Employees;
 public class LibrarySubscription {
     private int subscriptionId;
     private int studentId;
+    
 
     public LibrarySubscription(int subscriptionId, int studentId) {
         this.subscriptionId = subscriptionId;

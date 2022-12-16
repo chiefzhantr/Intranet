@@ -9,7 +9,7 @@ public class DataBase {
 	public HashMap<String, User> userByLogin;
 	public HashMap<String, String> passwordByLogin;
 	public Vector<New> news;
-	public Vector<Student> students;
+	private Vector<Course> courses;
 	public Map<Integer,Vector<Message> > messages;
 	
 	{
@@ -17,8 +17,7 @@ public class DataBase {
 		news = new Vector<New>();
 		users = new Vector<User>();
 		userByLogin = new HashMap<>();
-		passwordByLogin = new HashMap<>();
-		students = new Vector<Student>();
+		passwordByLogin = new HashMap<>();;
 		passwordByLogin.put("z_svanov@kbtu.kz","zhantore2004");
 		userByLogin.put("z_svanov@kbtu.kz", new Student());
 		news.add(new New("BAKHERDIN PRODAL MED!!", new Date()));

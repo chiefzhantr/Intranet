@@ -4,9 +4,8 @@ import java.util.Vector;
 
 public class Journal {
   private Vector<Mark> firstAttestation;
-  private Vector<Mark> secondtAttestation;
+  private Vector<Mark> secondAttestation;
   private double finalScore;
-  
   
   public double getFinalScore() {
     return finalScore;
@@ -23,8 +22,15 @@ public class Journal {
     return sum;
   }
   
-  private double getSecondtAttOverall() {
-    return getSum(secondtAttestation);
+  private void printFirstAttestation() {
+	  System.out.println(firstAttestation);
+  }
+  private void printSecondAttestation() {
+	  System.out.println(secondAttestation);
+  }
+  
+  private double getSecondAttOverall() {
+    return getSum(secondAttestation);
   }
   
   private double getFirstAttOverall() {
@@ -32,6 +38,6 @@ public class Journal {
   }
   
   private double getOverall() {
-    return getFirstAttOverall() + getFirstAttOverall() + finalScore;
+    return getFirstAttOverall() + getSecondAttOverall() + finalScore;
   }
 }
