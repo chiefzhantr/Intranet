@@ -1,21 +1,39 @@
 package Employees;
 
+import java.util.Date;
+import java.util.Objects;
 import java.util.Vector;
 
 import Main.Message;
-import Main.UniSystem;
 import Main.User;
+import System.UniSystem;
 
 public class Employee extends User {
     private double salary;
-    private Date hireDate;
+    private java.util.Date hireDate;
 
+    public Employee() {
+    	
+    }
+    
     public Employee(int id, String login, String password, String name, double salary, Date hireDate) {
         super(id, login, password, name);
         this.salary = salary;
         this.hireDate = hireDate;
     }
-
+    
+    public Employee(User user, double salary, Date hireDate) {
+    	super(user);
+    	this.salary = salary;
+        this.hireDate = hireDate;
+    }
+    
+    public Employee(Employee employee) {
+    	super(employee.getId(),employee.getLogin(),employee.getPassword(),employee.getName());
+    	this.salary = employee.salary;
+    	this.hireDate = employee.hireDate;
+    }
+    
     public double getSalary() {
         return salary;
     }
@@ -39,7 +57,7 @@ public class Employee extends User {
     public void sendMessage() {
     	String words = "12312412";
     	int addresat = 2;
-    	Date date = Date.curDate();
+    	Date date = new Date();
     	Message newMessage = new Message(words,date,addresat);
     	UniSystem.db.messages.get(addresat).add(newMessage); 
     }
@@ -54,5 +72,19 @@ public class Employee extends User {
     }
 
     public void viewMenu() {
+    
     }
+    
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(hireDate, salary);
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
+    
+    
 }

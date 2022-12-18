@@ -3,55 +3,45 @@ package Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Objects;
 
 import Interfaces.MenuAction;
+import System.UniSystem;
 
-public class User {
+public class User implements Cloneable{
     private int id;
     private String login;
     private String password;
     private String name;
     
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     
     
     public User() {
     	
     }
+    
+    
     	
-    public User(int id, String login, String password, String name) {
+    public User(int id, String login) {
+    	this.id = id;
+    	this.login = login;
+    }    
+    
+	public User(int id, String login, String password, String name) {
         this.id = id;
         this.login = login;
         this.password = password;
         this.name = name;
     }
-    
-    public int getId() {
-        return id;
+	
+	public User(User user) {
+    	this(user.id,user.login,user.password,user.name);
     }
-    public void setId(int id) {
-        this.id = id;
-    }
-    public String getLogin() {
-        return login;
-    }
-    public void setLogin(String login) {
-        this.login = login;
-    }
-    public String getPassword() {
-        return password;
-    }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    
     
     public void login() {
     	System.out.println("Hello, type your login and password");
@@ -103,6 +93,74 @@ public class User {
     	return "";
     }
     
+    public Date scanDate() {
+    	while(true) {
+    		Date date;
+			try {
+				date = (Date) formatter.parse(scan());
+				return date;
+			} catch (ParseException e) {
+				System.out.println("please, enter the date by the example");
+			}
+    	}
+    }
+    
+    
+    public String toString() {
+		return "User [id=" + id + ", login=" + login + ", password=" + password + ", name=" + name + ", bf=" + bf + "]";
+	}
+	public Object clone() throws CloneNotSupportedException {
+		 return super.clone();
+	}
+	public int hashCode() {
+		return Objects.hash(bf, id, login, name, password);
+	}
+	public boolean equals(Object obj) {
+		User other = (User) obj;
+		return this.id == other.id || this.login.equals(other.login);
+	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+    public String getLogin() {
+        return login;
+    }
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    
+    
+	
+    
+	
 }
 
 //z_svanov@kbtu.kz

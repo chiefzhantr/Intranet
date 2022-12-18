@@ -1,28 +1,63 @@
 package Main;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
 import Employees.Teacher;
-import Students.Student;
 
 public class Course {
     private int id;
     private String nameOfCourse;
     private List<Student> students;
-    private List<Teacher> teachers;
     private int numOfCredits;
     private Vector<Course> prerequisites;
 
-    public Course(int id, String nameOfCourse, List<Student> students, List<Teacher> teachers, int numOfCredits, Vector<Course> prerequisites) {
+    public Course() {
+    	
+    }
+
+	public Course(String nameOfCourse) {
+    	this.nameOfCourse = nameOfCourse;
+    }
+    
+    public Course(int id, String nameOfCourse, List<Student> students, int numOfCredits, Vector<Course> prerequisites) {
         this.id = id;
         this.nameOfCourse = nameOfCourse;
         this.students = students;
-        this.teachers = teachers;
         this.numOfCredits = numOfCredits;
         this.prerequisites = prerequisites;
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+	public int hashCode() {
+		return Objects.hash(id, nameOfCourse, numOfCredits, prerequisites, students);
+	}
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Course other = (Course) obj;
+		return Objects.equals(nameOfCourse, other.nameOfCourse);
+	}
+    
+    
+    
     public int getId() {
         return id;
     }
@@ -45,14 +80,6 @@ public class Course {
 
     public void setStudents(List<Student> students) {
         this.students = students;
-    }
-
-    public List<Teacher> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
     }
 
     public int getNumOfCredits() {

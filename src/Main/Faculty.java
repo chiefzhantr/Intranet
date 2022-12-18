@@ -1,5 +1,10 @@
 package Main;
 
 public enum Faculty {
-    SCM, BS, ISE, FIT, OMA
+    FIT,
+    ISE,
+    SCM,
+    BS,
+    OMA,
+    OR;
 }

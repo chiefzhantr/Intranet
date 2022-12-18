@@ -1,71 +1,84 @@
-package Students;
+package Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 import java.lang.reflect.Method;
 
 import Employees.LibrarySubscription;
 import Interfaces.MenuAction;
-import Main.Book;
-import Main.Course;
-import Main.Faculty;
-import Main.Journal;
-import Main.Mark;
-import Main.UniSystem;
-import Main.User;
+import System.UniSystem;
 
 public class Student extends User{
     private Faculty faculty;
     private Date yearOfPostuplenye;
     private double feeUchebny;
     private double gpa;
-    private Vector<Course> takingCourses;
-    private HashMap marks = new HashMap<Course, Journal>();
+    private Vector<Course> takingCourses = new Vector<Course>();;
+    public HashMap<Course, Mark> marks = new HashMap<Course, Mark>();
     private Vector<Book> books;
     private Vector<Book> takenBooks;
     private List<LibrarySubscription> librarySubscriptions;
 
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-    private int option;
     
     private MenuAction[] menu = new MenuAction[] {
+    	new MenuAction() { public void action() { viewMarks(); } public String actionName() { return "View Marks";}},	
         new MenuAction() { public void action() { viewCourses(); } public String actionName() { return "View Courses";}},
         new MenuAction() { public void action() { viewOrganizations(); } public String actionName() { return "View Organizations";}},
         new MenuAction() { public void action() { viewAttendance(); } public String actionName() { return "View Attendance";} },
-        new MenuAction() { public void action() { viewTranscript(); } public String actionName() { return "viewTranscript";} },
+        new MenuAction() { public void action() { viewTranscript(); } public String actionName() { return "View Transcript";} },
         new MenuAction() { public void action() { rateTeachers(); } public String actionName() { return "Rate Teachers";} },
         new MenuAction() { public void action() { openLibrary(); } public String actionName() { return "Open Library";} },
         new MenuAction() { public void action() { logout(); } public String actionName() { return "Logout";} },
     };
     
+    {	
+//    	takingCourses.add(new Course("OOP"));
+//    	marks.put(takingCourses.firstElement(), new Mark());
+//    	marks.get(takingCourses.firstElement()).putMark(12, Mark.attestations.elementAt(0));
+    }
     public Student() {
     	
     }
     
-    public Student(int id, String login, String password, String name, Faculty faculty, Date yearOfPostuplenye, double feeUchebny, double gpa, Vector<Course> takingCourses, Vector<Book> books, Vector<Book> takenBooks, List<LibrarySubscription> librarySubscriptions) {
+    public Student(int id, String name) {
+    	this.setId(id);
+    	this.setName(name);
+    }
+    
+    public Student(int id, String login, String password, String name, Faculty faculty) {
         super(id, login, password, name);
         this.faculty = faculty;
-        this.yearOfPostuplenye = yearOfPostuplenye;
-        this.feeUchebny = feeUchebny;
-        this.gpa = gpa;
-        this.takingCourses = takingCourses;
-        this.books = books;
-        this.takenBooks = takenBooks;
-        this.librarySubscriptions = librarySubscriptions;
+    }
+    
+    public Student(User user, Faculty faculty) {
+    	super(user);
+    	this.faculty = faculty;
     }
     
     //operations
-    public void openJournal() {
+    public void viewMarks() {
     	System.out.println("OK, for which discipline do you want to see the journal");
-    	String discipline = scan();
-//    	if(UniSystem.db)
+    	String name = scan();
+    	if(!takingCourses.contains(new Course(name))) {
+    		System.out.println("Please enter the name of the course correct");
+    		viewMarks();
+    		return;
+    	}
+    	for(Course course : takingCourses) {
+    		if(course.equals(new Course(name))) System.out.println(marks.get(course));
+    	}
+    	viewMenu();
     }
 
+    
     
     public void viewTranscript() {
     	
@@ -124,6 +137,7 @@ public class Student extends User{
 
     
     public void viewMenu() {
+    	int option;
     	System.out.println("Choose option: ");
     	for(int i = 0;i < menu.length;i++) {
     		System.out.println(i+1+") " + menu[i].actionName());
@@ -159,6 +173,9 @@ public class Student extends User{
     
     
     //get,set
+    public HashMap<Course, Mark> getMarks() {
+    	return marks;
+    }
     public Faculty getFaculty() {
         return faculty;
     }
@@ -207,9 +224,29 @@ public class Student extends User{
     public void setLibrarySubscriptions(List<LibrarySubscription> librarySubscriptions) {
         this.librarySubscriptions = librarySubscriptions;
     }
-    
 
+	@Override
+	public String toString() {
+		return "Student:" + this.getId() + " - " + this.getName();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Arrays.hashCode(menu);
+		result = prime * result + Objects.hash(bf, books, faculty, feeUchebny, gpa, librarySubscriptions, marks,
+				takenBooks, takingCourses, yearOfPostuplenye);
+		return result;
+	}
+
+	public boolean equals(Object obj) {
+		return super.equals(obj);
+	}
  }
 
 //z_svanov@kbtu.kz
 //zhantore2004
+//
+//p_shamoi@kbtu.kz
+//pakita

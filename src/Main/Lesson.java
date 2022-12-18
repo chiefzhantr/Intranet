@@ -18,7 +18,7 @@ public class Lesson {
     public void setLessonType(LessonType lessonType) {
         this.lessonType = lessonType;
     }
-
+    
     public Date getDayAndTime() {
         return dayAndTime;
     }

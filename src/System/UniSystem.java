@@ -1,11 +1,13 @@
-package Main;
+package System;
+
+import Main.User;
 
 public class UniSystem {
 	public static DataBase db;
 	public static User currentUser;
 	
 	static {
-		db = new DataBase();
+		db = DataBase.getDataBase();
 	}
 	
 	public void run() {

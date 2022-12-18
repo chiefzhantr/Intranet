@@ -1,13 +1,13 @@
 package Main;
 
-import Employees.Date;
+import java.util.Date;
 
 public class Message {
 	public String words;
 	public Date sentDate;
 	public int addresatId;
 	
-
+	
 	public Message() {
 		
 	}
