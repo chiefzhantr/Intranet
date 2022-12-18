@@ -22,7 +22,7 @@ public class Lesson {
     public Date getDayAndTime() {
         return dayAndTime;
     }
-
+    
     public void setDayAndTime(Date dayAndTime) {
         this.dayAndTime = dayAndTime;
     }

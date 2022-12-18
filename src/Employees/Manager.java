@@ -25,6 +25,7 @@ public class Manager extends Employee {
 	        new MenuAction() { public void action() { viewTeachers(); } public String actionName() { return "View Teachers";} },
 	        new MenuAction() { public void action() { staticReport(); } public String actionName() { return "Static Report";} },
 	        new MenuAction() { public void action() { manageCourses() ; } public String actionName() { return "Manage Courses";} },
+	        new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
 	        new MenuAction() { public void action() { logout() ; } public String actionName() { return "Logout";} },
     };
     
@@ -180,6 +181,7 @@ public class Manager extends Employee {
     }
     
     public void manageCourses() {
+    	
     }
     
     public void viewMenu() {
@@ -196,6 +198,26 @@ public class Manager extends Employee {
     	menu[option].action();
     }
 
+//    public void changePassword() {
+//    	System.out.println("OK, type your old password");
+//    	
+//    	while(true) {
+//    		String oldPassword = scan();
+////    		System.out.println(UniSystem.db.passwordByLogin.get(login));
+//    		System.out.println(getLogin());
+//    		System.out.println(oldPassword);
+//    		if(oldPassword.equals(UniSystem.db.passwordByLogin.get(this.getLogin()))) {
+//    			break;
+//    		} else {
+//    			System.out.println("Please enter the correct password");
+//    		}
+//    	}
+//    	System.out.println("OK, type your new password");
+//    	String newPassword = scan();
+//    	UniSystem.db.passwordByLogin.put(this.getLogin(), newPassword);
+//    	this.setPassword(newPassword);
+//    }
+    
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -208,7 +230,6 @@ public class Manager extends Employee {
 	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
-		
 	}
     
 }

@@ -11,7 +11,7 @@ import System.UniSystem;
 public class Employee extends User {
     private double salary;
     private java.util.Date hireDate;
-
+    
     public Employee() {
     	
     }

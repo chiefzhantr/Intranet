@@ -36,6 +36,7 @@ public class Student extends User{
         new MenuAction() { public void action() { viewTranscript(); } public String actionName() { return "View Transcript";} },
         new MenuAction() { public void action() { rateTeachers(); } public String actionName() { return "Rate Teachers";} },
         new MenuAction() { public void action() { openLibrary(); } public String actionName() { return "Open Library";} },
+        new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
         new MenuAction() { public void action() { logout(); } public String actionName() { return "Logout";} },
     };
     
@@ -134,6 +135,9 @@ public class Student extends User{
     public void openLibrary() {
     	
     }
+    
+   
+    
 
     
     public void viewMenu() {

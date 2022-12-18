@@ -15,6 +15,8 @@ public class Admin extends Employee {
 	        new MenuAction() { public void action() { removeUser(); } public String actionName() { return "Remove User";}},
 	        new MenuAction() { public void action() { updateUser(); } public String actionName() { return "Update User";} },
 	        new MenuAction() { public void action() { showLogs(); } public String actionName() { return "Show Logs";} },
+	        new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
+	        new MenuAction() { public void action() { logout(); } public String actionName() { return "Logout";} },
     };
 	
 	public Admin() {
@@ -50,11 +52,11 @@ public class Admin extends Employee {
     public void removeUser() {
     	
     }
-
+    
     public void updateUser() {
     	
     }
-
+    
     public void showLogs() {
     	
     }
@@ -73,7 +75,6 @@ public class Admin extends Employee {
     	menu[option].action();
     }
 
-	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
@@ -81,7 +82,6 @@ public class Admin extends Employee {
 		return result;
 	}
 	
-	@Override
 	public boolean equals(Object obj) {
 		return super.equals(obj);
 	}

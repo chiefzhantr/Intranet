@@ -34,12 +34,15 @@ public class Teacher extends Employee {
             new MenuAction() { public void action() { manageCourseFiles(); } public String actionName() { return "Manage Course Files";}},
             new MenuAction() { public void action() { generateReport(); } public String actionName() { return "Generate Report";} },
             new MenuAction() { public void action() { viewStudents(); } public String actionName() { return "View Students";} },
+            new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
             new MenuAction() { public void action() { logout(); } public String actionName() { return "Logout";} },
     };
+    
     {
     	courses = new Vector<Course>();
     	courses.add(new Course("OOP"));
     }
+    
     public Teacher() {
     	super();
     }

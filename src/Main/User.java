@@ -79,6 +79,26 @@ public class User implements Cloneable{
 		UniSystem.currentUser.viewMenu();
     };
     
+    public void changePassword() {
+    	System.out.println("OK, type your old password");
+    	
+    	while(true) {
+    		String oldPassword = scan();
+//    		System.out.println(UniSystem.db.passwordByLogin.get(login));
+//    		System.out.println(getLogin);
+    		System.out.println(oldPassword);
+    		if(oldPassword.equals(UniSystem.db.passwordByLogin.get(this.getLogin()))) {
+    			break;
+    		} else {
+    			System.out.println("Please enter the correct password");
+    		}
+    	}
+    	System.out.println("OK, type your new password");
+    	String newPassword = scan();
+    	UniSystem.db.passwordByLogin.put(this.login, newPassword);
+    	this.password = newPassword;
+    }
+    
     public void viewMenu() {
     	
     }
