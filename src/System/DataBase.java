@@ -5,6 +5,7 @@ import Employees.Manager;
 import Employees.Teacher;
 import Main.Course;
 import Main.Faculty;
+import Main.Mail;
 import Main.Message;
 import Main.New;
 import Main.Student;
@@ -21,7 +22,7 @@ public class DataBase {
 	private Vector<Student> students;
 	private Vector<Teacher> teachers;
 	private Vector<Course> courses;
-	public Map<Integer,Vector<Message> > messages;
+	public HashMap<Integer, Mail > mails;
 	public Stack<User> requests;
 	public static Vector<Faculty> faculties = new Vector<Faculty>();
 	static {
@@ -40,20 +41,8 @@ public class DataBase {
 		students = new Vector<Student>();
 		userByLogin = new HashMap<>();
 		passwordByLogin = new HashMap<>();;
+		mails = new HashMap<Integer, Mail>();
 		
-		passwordByLogin.put("z_svanov@kbtu.kz","zhantore2004");
-		passwordByLogin.put("p_shamoi@kbtu.kz","pakita");
-		passwordByLogin.put("manager@kbtu.kz","manager");
-		passwordByLogin.put("admin@kbtu.kz","admin");
-		
-		userByLogin.put("p_shamoi@kbtu.kz", new Teacher());
-		userByLogin.put("manager@kbtu.kz", new Manager());
-		userByLogin.put("admin@kbtu.kz", new Admin());
-		Student stud = new Student(19,"Zhantore");
-		userByLogin.put("z_svanov@kbtu.kz", stud);
-		students.add(stud);
-		
-		news.add(new New("BAKHERDIN PRODAL MED!!", new Date()));
 	}
 	
 	private DataBase() {
@@ -84,5 +73,28 @@ public class DataBase {
 
 	public void setStudents(Vector<Student> students) {
 		this.students = students;
+	}
+	
+	
+	public void initialize() {
+		passwordByLogin.put("z_svanov@kbtu.kz","zhantore2004");
+		passwordByLogin.put("p_shamoi@kbtu.kz","pakita");
+		passwordByLogin.put("manager@kbtu.kz","manager");
+		passwordByLogin.put("admin@kbtu.kz","admin");
+		
+		userByLogin.put("p_shamoi@kbtu.kz", new Teacher());
+		userByLogin.put("manager@kbtu.kz", new Manager());
+		userByLogin.put("admin@kbtu.kz", new Admin());
+		
+		Student stud = new Student(19,"Zhantore");
+		userByLogin.put("z_svanov@kbtu.kz", stud);
+		students.add(stud);
+		Admin newAdmin = new Admin(321, "newadmin", "newadmin", "serikbol", 9999, new Date());
+		
+		users.add(newAdmin);
+		passwordByLogin.put(newAdmin.getLogin(),newAdmin.getPassword());
+		userByLogin.put(newAdmin.getLogin(), newAdmin);
+		
+		news.add(new New("BAKHERDIN PRODAL MED!!", new Date()));
 	}
 }

@@ -34,8 +34,9 @@ public class Teacher extends Employee {
             new MenuAction() { public void action() { manageCourseFiles(); } public String actionName() { return "Manage Course Files";}},
             new MenuAction() { public void action() { generateReport(); } public String actionName() { return "Generate Report";} },
             new MenuAction() { public void action() { viewStudents(); } public String actionName() { return "View Students";} },
-            new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
-            new MenuAction() { public void action() { logout(); } public String actionName() { return "Logout";} },
+            new MenuAction() { public void action() { openChat(); } public String actionName() { return "Open Chat";}},
+	        new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
+	        new MenuAction() { public void action() { logout() ; } public String actionName() { return "Logout";} },
     };
     
     {
@@ -175,7 +176,7 @@ public class Teacher extends Employee {
     
     public void viewMenu() {
     	int option;
-    	System.out.println("Choose option: ");
+    	System.out.println("\nChoose option: ");
     	for(int i = 0;i < menu.length;i++) {
     		System.out.println(i+1+") " + menu[i].actionName());
     	}

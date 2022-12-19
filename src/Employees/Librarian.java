@@ -4,10 +4,19 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import Interfaces.MenuAction;
 import Main.User;
 
 public class Librarian extends Employee {
     private List<LibrarySubscription> subscriptions;
+    
+    private MenuAction[] menu = new MenuAction[] {
+	        new MenuAction() { public void action() { openChat(); } public String actionName() { return "Open Chat";}},
+	        new MenuAction() { public void action() { rentBook() ; } public String actionName() { return "Rent Book";} },
+	        new MenuAction() { public void action() { returnBook() ; } public String actionName() { return "Return Book";} },
+	        new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
+	        new MenuAction() { public void action() { logout() ; } public String actionName() { return "Logout";} },
+    };
     
     public Librarian(int id, String login) {
     	this.setId(id);

@@ -8,6 +8,7 @@ public class UniSystem {
 	
 	static {
 		db = DataBase.getDataBase();
+		db.initialize();
 	}
 	
 	public void run() {

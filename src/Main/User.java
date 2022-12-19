@@ -20,15 +20,16 @@ public class User implements Cloneable{
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     
-    
     public User() {
     	
     }
     
-    
+    public User(int id) {
+    	this.id = id;
+    }
     	
     public User(int id, String login) {
-    	this.id = id;
+    	this(id);
     	this.login = login;
     }    
     
@@ -44,7 +45,7 @@ public class User implements Cloneable{
     }
     
     public void login() {
-    	System.out.println("Hello, type your login and password");
+    	System.out.println("\nHello, type your login and password");
     	int tries = 6;
 		while(true) { 
 			if(tries == 0) System.out.println("Goodbye nedo haker or slowpoke");
@@ -103,6 +104,10 @@ public class User implements Cloneable{
     	
     }
     
+    protected void addToDataBase() {
+    	
+    };
+    
     public String scan() {
     	try {
     		String word = bf.readLine();
@@ -137,7 +142,7 @@ public class User implements Cloneable{
 	}
 	public boolean equals(Object obj) {
 		User other = (User) obj;
-		return this.id == other.id || this.login.equals(other.login);
+		return this.id == other.id || other.login.equals(this.login);
 	}
     
     

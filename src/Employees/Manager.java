@@ -21,6 +21,7 @@ public class Manager extends Employee {
     private MenuAction[] menu = new MenuAction[] {
 	        new MenuAction() { public void action() { createUser(); } public String actionName() { return "Create User";}},
 	        new MenuAction() { public void action() { manageNews(); } public String actionName() { return "Manage News";}},
+	        new MenuAction() { public void action() { openChat(); } public String actionName() { return "Open Chat";}},
 	        new MenuAction() { public void action() { viewStudents(); } public String actionName() { return "View Students";} },
 	        new MenuAction() { public void action() { viewTeachers(); } public String actionName() { return "View Teachers";} },
 	        new MenuAction() { public void action() { staticReport(); } public String actionName() { return "Static Report";} },
@@ -186,7 +187,7 @@ public class Manager extends Employee {
     
     public void viewMenu() {
     	int option;
-    	System.out.println("Choose option: ");
+    	System.out.println("\nChoose option: ");
     	for(int i = 0;i < menu.length;i++) {
     		System.out.println(i+1+") " + menu[i].actionName());
     	}
@@ -198,25 +199,25 @@ public class Manager extends Employee {
     	menu[option].action();
     }
 
-//    public void changePassword() {
-//    	System.out.println("OK, type your old password");
-//    	
-//    	while(true) {
-//    		String oldPassword = scan();
-////    		System.out.println(UniSystem.db.passwordByLogin.get(login));
-//    		System.out.println(getLogin());
-//    		System.out.println(oldPassword);
-//    		if(oldPassword.equals(UniSystem.db.passwordByLogin.get(this.getLogin()))) {
-//    			break;
-//    		} else {
-//    			System.out.println("Please enter the correct password");
-//    		}
-//    	}
-//    	System.out.println("OK, type your new password");
-//    	String newPassword = scan();
-//    	UniSystem.db.passwordByLogin.put(this.getLogin(), newPassword);
-//    	this.setPassword(newPassword);
-//    }
+    public void changePassword() {
+    	System.out.println("OK, type your old password");
+    	
+    	while(true) {
+    		String oldPassword = scan();
+//    		System.out.println(UniSystem.db.passwordByLogin.get(login));
+    		System.out.println(getLogin());
+    		System.out.println(oldPassword);
+    		if(oldPassword.equals(UniSystem.db.passwordByLogin.get(this.getLogin()))) {
+    			break;
+    		} else {
+    			System.out.println("Please enter the correct password");
+    		}
+    	}
+    	System.out.println("OK, type your new password");
+    	String newPassword = scan();
+    	UniSystem.db.passwordByLogin.put(this.getLogin(), newPassword);
+    	this.setPassword(newPassword);
+    }
     
 	@Override
 	public int hashCode() {

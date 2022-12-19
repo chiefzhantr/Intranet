@@ -15,12 +15,17 @@ public class Admin extends Employee {
 	        new MenuAction() { public void action() { removeUser(); } public String actionName() { return "Remove User";}},
 	        new MenuAction() { public void action() { updateUser(); } public String actionName() { return "Update User";} },
 	        new MenuAction() { public void action() { showLogs(); } public String actionName() { return "Show Logs";} },
+	        new MenuAction() { public void action() { openChat(); } public String actionName() { return "Open Chat";}},
 	        new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
-	        new MenuAction() { public void action() { logout(); } public String actionName() { return "Logout";} },
-    };
+	        new MenuAction() { public void action() { logout() ; } public String actionName() { return "Logout";} },
+	};
 	
 	public Admin() {
 		
+	}
+	
+	public Admin(int id) {
+		setId(id);
 	}
 	
     public Admin(int id, String login, String password, String name, double salary, Date hireDate) {
@@ -63,7 +68,7 @@ public class Admin extends Employee {
     
     public void viewMenu() {
     	int option;
-    	System.out.println("Choose option: ");
+    	System.out.println("\nChoose option: ");
     	for(int i = 0;i < menu.length;i++) {
     		System.out.println(i+1+") " + menu[i].actionName());
     	}
@@ -74,6 +79,10 @@ public class Admin extends Employee {
     	}
     	menu[option].action();
     }
+    
+//    protected void addToDataBase() {
+//    	UniSystem.db.e
+//    };
 
 	public int hashCode() {
 		final int prime = 31;
