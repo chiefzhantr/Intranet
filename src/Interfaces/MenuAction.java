@@ -1,6 +1,8 @@
 package Interfaces;
 
-public interface MenuAction {
+import java.io.Serializable;
+
+public interface MenuAction extends Serializable{
 	public void action();
 	public String actionName();
 }

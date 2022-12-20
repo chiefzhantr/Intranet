@@ -1,4 +1,12 @@
 package System;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.*;
 
 import Employees.Manager;
@@ -11,20 +19,22 @@ import Main.New;
 import Main.Student;
 import Main.User;
 
-public class DataBase {
+public class DataBase implements Serializable {
 	
+	private static final long serialVersionUID = -1175920159699221042L;
+
 	private static DataBase db;
 	
+	public Vector<New> news;
 	public Vector<User> users;
 	public HashMap<String, User> userByLogin;
 	public HashMap<String, String> passwordByLogin;
-	public Vector<New> news;
 	private Vector<Student> students;
 	private Vector<Teacher> teachers;
-	private Vector<Course> courses;
+	transient private Vector<Course> courses;
 	public HashMap<Integer, Mail > mails;
 	public Stack<User> requests;
-	public static Vector<Faculty> faculties = new Vector<Faculty>();
+	transient public static Vector<Faculty> faculties = new Vector<Faculty>();
 	static {
 		faculties.add(Faculty.FIT);
 		faculties.add(Faculty.BS);
@@ -70,7 +80,7 @@ public class DataBase {
 	public Vector<Student> getStudents() {
 		return students;
 	}
-
+	
 	public void setStudents(Vector<Student> students) {
 		this.students = students;
 	}
@@ -90,11 +100,21 @@ public class DataBase {
 		userByLogin.put("z_svanov@kbtu.kz", stud);
 		students.add(stud);
 		Admin newAdmin = new Admin(321, "newadmin", "newadmin", "serikbol", 9999, new Date());
-		
 		users.add(newAdmin);
 		passwordByLogin.put(newAdmin.getLogin(),newAdmin.getPassword());
 		userByLogin.put(newAdmin.getLogin(), newAdmin);
 		
 		news.add(new New("BAKHERDIN PRODAL MED!!", new Date()));
 	}
+
+
+	public String toString() {
+		return "DataBase " + users + ", news" + news; 
+	}
+	
+	
+	
+	
+	
+	
 }

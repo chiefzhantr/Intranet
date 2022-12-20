@@ -25,7 +25,7 @@ public class Teacher extends Employee {
     private Vector<Course> courses;
     private TeacherType type;
 
-    private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+    
     private int option;
     
     private MenuAction[] menu = new MenuAction[] {
@@ -131,7 +131,7 @@ public class Teacher extends Employee {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + Arrays.hashCode(menu);
-		result = prime * result + Objects.hash(bf, courses, option, type);
+		result = prime * result + Objects.hash(courses, option, type);
 		return result;
 	}
 
@@ -143,7 +143,7 @@ public class Teacher extends Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Teacher other = (Teacher) obj;
-		return Objects.equals(bf, other.bf) && Objects.equals(courses, other.courses) && Arrays.equals(menu, other.menu)
+		return Objects.equals(courses, other.courses) && Arrays.equals(menu, other.menu)
 				&& option == other.option && type == other.type;
 	}
 

@@ -1,10 +1,11 @@
 package Main;
 
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Vector;
 
-public class Message {
+public class Message implements Serializable{
 	public String words;
 	public Date sentDate;
 	public int addresatId;

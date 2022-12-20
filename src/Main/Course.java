@@ -1,12 +1,13 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
 
 import Employees.Teacher;
 
-public class Course {
+public class Course implements Serializable{
     private int id;
     private String nameOfCourse;
     private List<Student> students;

@@ -3,6 +3,7 @@ package Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,14 +12,12 @@ import java.util.Objects;
 import Interfaces.MenuAction;
 import System.UniSystem;
 
-public class User implements Cloneable{
-    private int id;
+public class User implements Serializable,Cloneable{
+    
+	private int id;
     private String login;
     private String password;
     private String name;
-    
-    private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-    private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     
     public User() {
     	
@@ -109,6 +108,7 @@ public class User implements Cloneable{
     };
     
     public String scan() {
+    	BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     	try {
     		String word = bf.readLine();
     		return word;
@@ -119,6 +119,7 @@ public class User implements Cloneable{
     }
     
     public Date scanDate() {
+    	SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     	while(true) {
     		Date date;
 			try {
@@ -132,13 +133,14 @@ public class User implements Cloneable{
     
     
     public String toString() {
-		return "User [id=" + id + ", login=" + login + ", password=" + password + ", name=" + name + ", bf=" + bf + "]";
+//		return "User [id=" + id + ", login=" + login + ", password=" + password + ", name=" + name + ", bf=" + bf + "]";
+    	return "user with id = " + id;
 	}
 	public Object clone() throws CloneNotSupportedException {
 		 return super.clone();
 	}
 	public int hashCode() {
-		return Objects.hash(bf, id, login, name, password);
+		return Objects.hash(id, login, name, password);
 	}
 	public boolean equals(Object obj) {
 		User other = (User) obj;

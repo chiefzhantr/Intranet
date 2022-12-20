@@ -1,6 +1,8 @@
 package Employees;
 
-public class LibrarySubscription {
+import java.io.Serializable;
+
+public class LibrarySubscription implements Serializable{
     private int subscriptionId;
     private int studentId;
     

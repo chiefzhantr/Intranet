@@ -1,5 +1,7 @@
 package Interfaces;
 
-public interface Researcher {
+import java.io.Serializable;
+
+public interface Researcher extends Serializable{
     void doScience();
 }

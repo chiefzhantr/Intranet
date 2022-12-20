@@ -3,6 +3,7 @@ package Main;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
@@ -15,7 +16,7 @@ import Employees.LibrarySubscription;
 import Interfaces.MenuAction;
 import System.UniSystem;
 
-public class Student extends User{
+public class Student extends User {
     private Faculty faculty;
     private Date yearOfPostuplenye;
     private double feeUchebny;
@@ -25,8 +26,6 @@ public class Student extends User{
     private Vector<Book> books;
     private Vector<Book> takenBooks;
     private List<LibrarySubscription> librarySubscriptions;
-
-    private BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
     
     private MenuAction[] menu = new MenuAction[] {
     	new MenuAction() { public void action() { viewMarks(); } public String actionName() { return "View Marks";}},	
@@ -239,7 +238,7 @@ public class Student extends User{
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + Arrays.hashCode(menu);
-		result = prime * result + Objects.hash(bf, books, faculty, feeUchebny, gpa, librarySubscriptions, marks,
+		result = prime * result + Objects.hash(books, faculty, feeUchebny, gpa, librarySubscriptions, marks,
 				takenBooks, takingCourses, yearOfPostuplenye);
 		return result;
 	}

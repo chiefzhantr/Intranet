@@ -1,6 +1,8 @@
 package Main;
 
-public enum LessonType {
+import java.io.Serializable;
+
+public enum LessonType implements Serializable{
     LECTURE,
     PRACTICE
 }

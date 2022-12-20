@@ -50,8 +50,6 @@ public class Admin extends Employee {
     		}
     		requests.pop();
     	}
-    	System.out.println(UniSystem.db.users.size());
-    	System.out.println(UniSystem.db.users);
     }
     
     public void removeUser() {
@@ -80,9 +78,6 @@ public class Admin extends Employee {
     	menu[option].action();
     }
     
-//    protected void addToDataBase() {
-//    	UniSystem.db.e
-//    };
 
 	public int hashCode() {
 		final int prime = 31;

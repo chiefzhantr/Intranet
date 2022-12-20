@@ -1,8 +1,9 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Lesson {
+public class Lesson implements Serializable{
     private LessonType lessonType;
     private Date dayAndTime;
 

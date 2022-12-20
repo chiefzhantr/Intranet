@@ -1,5 +1,7 @@
 package Main;
 
-public enum MarkType {
+import java.io.Serializable;
+
+public enum MarkType implements Serializable {
 	FIRSTATT,SECONDATT,FINAL;
 }

@@ -1,13 +1,18 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Book {
+public class Book implements Serializable {
     private int bookId;
     private String name;
     private String author;
     private Date publishDate;
 
+    public Book() {
+    	
+    }
+    
     public Book(int bookId, String name, String author, Date publishDate) {
         this.bookId = bookId;
         this.name = name;

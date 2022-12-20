@@ -1,6 +1,8 @@
 package Employees;
 
-public enum ManagerType {
+import java.io.Serializable;
+
+public enum ManagerType implements Serializable {
     OR,
     FIT,
     ISE,

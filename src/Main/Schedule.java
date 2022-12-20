@@ -1,5 +1,7 @@
 package Main;
 
-public class Schedule {
+import java.io.Serializable;
+
+public class Schedule implements Serializable {
 	
-}
+} 

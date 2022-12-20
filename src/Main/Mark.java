@@ -1,12 +1,13 @@
 package Main;
 
+import java.io.Serializable;
 import java.util.Vector;
 
-public class Mark {
+public class Mark implements Serializable{
   private Vector<Double> firstAttestation = new Vector<Double>();
   private Vector<Double> secondAttestation = new Vector<Double>();
   private double finalScore = 0;
-  public static Vector<MarkType> attestations = new Vector<MarkType>();
+  transient public static Vector<MarkType> attestations = new Vector<MarkType>();
   
   static {
 	  attestations.add(MarkType.FINAL);
