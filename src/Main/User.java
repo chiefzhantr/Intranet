@@ -44,7 +44,7 @@ public class User implements Serializable,Cloneable{
     }
     
     public void login() {
-    	System.out.println("\nHello, type your login and password");
+    	System.out.println("Hello, type your login and password");
     	int tries = 6;
 		while(true) { 
 			if(tries == 0) System.out.println("Goodbye nedo haker or slowpoke");

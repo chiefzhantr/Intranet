@@ -24,7 +24,7 @@ public class Teacher extends Employee {
 	
     private Vector<Course> courses;
     private TeacherType type;
-
+    private Faculty faculty;
     
     private int option;
     
@@ -38,32 +38,38 @@ public class Teacher extends Employee {
 	        new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
 	        new MenuAction() { public void action() { logout() ; } public String actionName() { return "Logout";} },
     };
+	
     
     {
     	courses = new Vector<Course>();
-    	courses.add(new Course("OOP"));
     }
     
     public Teacher() {
     	super();
     }
     
-    public Teacher(int id, String login, String password, String name, double salary, Date hireDate, Vector<Course> courses, TeacherType type) {
-        super(id, login, password, name, salary, hireDate);
-        this.courses = courses;
-        this.type = type;
+    public Teacher(int id) {
+    	this.setId(id);
     }
     
-    public Teacher(Employee employee) {
+    public Teacher(int id, String login, String password, String name, double salary, Date hireDate, TeacherType type, Faculty faculty) {
+        super(id, login, password, name, salary, hireDate);
+        this.type = type;
+        this.faculty = faculty;
+    }
+    
+    public Teacher(Employee employee, Faculty faculty) {
     	super(employee);
+    	this.type = TeacherType.PROFESSOR;
+    	this.faculty = faculty;
     }
     
     public Vector<Course> getCourses() {
         return courses;
     }
     
-    public void setCourses(Vector<Course> courses) {
-        this.courses = courses;
+    public void addCourse(Course course) {
+        this.courses.add(course);
     }
     
     public TeacherType getType() {
@@ -78,49 +84,55 @@ public class Teacher extends Employee {
 
     
 	public void putMarks() {
-    	System.out.println("OK, for which discipline do you want to see the journal");
-    	String name = scan();
-    	if(!courses.contains(new Course(name))) {
+    	System.out.println("OK, type id of discipline you want to open the journal");
+    	Course.showCourses(courses);
+    	int id = Integer.parseInt(scan());
+    	if(!courses.contains(new Course(id))) {
     		System.out.println("Please enter the name of the course correct");
     		putMarks();
     		return;
     	}
     	System.out.println("OK, what is the student's id");
-    	int studentId = Integer.parseInt(scan());
-    	for(Course course : courses) {
-    		if(course.equals(new Course(name))) {
-				Vector<Student> students = new Vector<Student>(); 
-//				System.out.println((Vector<Student>)UniSystem.db.getStudents().stream().filter(s -> s.getTakingCourses().contains(course)).collect(Collectors.toList()));
-    	    	for(Student student : UniSystem.db.getStudents()) {
-    	    		if(student.getTakingCourses().contains(course)) students.add(student);
-    	    	}
-    			
-				for(Student student : students) {
-    	    		if(student.getId() == studentId) {
-    	    			System.out.println("OK, what is the attestation you want to put(1 - first att, 2 - second att, 0 - final) and  score you wanna give him and ");
-    	    			int attestation = Integer.parseInt(scan());
-    	    			while(attestation < 0 || attestation > 2) {
-    	    				System.out.println("Wrong attestation");
-    	    				attestation = Integer.parseInt(scan());
-    	    			};
-    	    			double score = Double.parseDouble(scan());
-    	    			while( ((score < 0 || score > 30) && (attestation != 0)) || ( (score < 0 || score > 40) && attestation == 0)) {
-    	    				System.out.println("Wrong score");
-    	    				score = Double.parseDouble(scan());
-    	    			};
-    	    			
-    	    			Mark mark = student.marks.get(course);
-    	    			mark.putMark(score, Mark.attestations.elementAt(attestation));
-    	    			student.marks.put(course,mark);
-//    	    			System.out.println(student.getName());
-//    	    			System.out.println(student.marks.get(course));
-    	    			viewMenu();
-    	    			return;
-    	    		}
-    	    	}
-    	    	
-    		}
+    	Course course = new Course(id);
+    	int studentId;
+    	while(true) {
+    		studentId = Integer.parseInt(scan());
+	    	if(UniSystem.db.students.contains(new Student(studentId))) break;
     	}
+//    	System.out.println("OK, what is the attestation you want to put(1 - first att, 2 - second att, 0 - final) and  score you wanna give him and ");
+//		int attestation = Integer.parseInt(scan());
+//		while(attestation < 0 || attestation > 2) {
+//			System.out.println("Wrong attestation");
+//			attestation = Integer.parseInt(scan());
+//		};
+//		double score = Double.parseDouble(scan());
+//		while( ((score < 0 || score > 30) && (attestation != 0)) || ( (score < 0 || score > 40) && attestation == 0)) {
+//			System.out.println("Wrong score");
+//			score = Double.parseDouble(scan());
+//		};
+//		
+//		Mark mark = student.marks.get(course);
+//		mark.putMark(score, Mark.attestations.elementAt(attestation));
+//		student.marks.put(course,mark);
+//		viewMenu();
+//		return;
+    	
+//    	for(Course course : courses) {
+//    		if(course.equals(new Course(id))) {
+//				Vector<Student> students = new Vector<Student>(); 
+////				System.out.println((Vector<Student>)UniSystem.db.getStudents().stream().filter(s -> s.getTakingCourses().contains(course)).collect(Collectors.toList()));
+//    	    	for(Student student : UniSystem.db.getStudents()) {
+//    	    		if(student.getTakingCourses().contains(course)) students.add(student);
+//    	    	}
+//    			
+//				for(Student student : students) {
+//    	    		if(student.getId() == studentId) {
+//    	    			
+//    	    		}
+//    	    	}
+//    	    	
+//    		}
+//    	}
     	
     	
     	
@@ -143,8 +155,7 @@ public class Teacher extends Employee {
 		if (getClass() != obj.getClass())
 			return false;
 		Teacher other = (Teacher) obj;
-		return Objects.equals(courses, other.courses) && Arrays.equals(menu, other.menu)
-				&& option == other.option && type == other.type;
+		return this.getId() == other.getId();
 	}
 
 	public void generateReport() {
@@ -172,6 +183,7 @@ public class Teacher extends Employee {
     public void startAttendance() {
     }
     public void doManualAttendance() {
+    	
     }
     
     public void viewMenu() {
@@ -187,6 +199,10 @@ public class Teacher extends Employee {
     	}
     	menu[option].action();
     }
+
+	public Faculty getFaculty() {
+		return faculty;
+	}
     
 }
 

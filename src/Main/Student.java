@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Vector;
@@ -18,18 +19,19 @@ import System.UniSystem;
 
 public class Student extends User {
     private Faculty faculty;
-    private Date yearOfPostuplenye;
-    private double feeUchebny;
+    private Date yearOfEnrollment;
+    private double fee;
     private double gpa;
-    private Vector<Course> takingCourses = new Vector<Course>();;
+    private int semester = 0;
+    public Vector<Vector<Course>> takenCourses = new Vector< Vector<Course> >();
+    private Vector<Course> takingCourses = new Vector<Course>();
     public HashMap<Course, Mark> marks = new HashMap<Course, Mark>();
-    private Vector<Book> books;
     private Vector<Book> takenBooks;
-    private List<LibrarySubscription> librarySubscriptions;
     
     private MenuAction[] menu = new MenuAction[] {
     	new MenuAction() { public void action() { viewMarks(); } public String actionName() { return "View Marks";}},	
         new MenuAction() { public void action() { viewCourses(); } public String actionName() { return "View Courses";}},
+        new MenuAction() { public void action() { registerForCourse(); } public String actionName() { return "Registration for course";} },
         new MenuAction() { public void action() { viewOrganizations(); } public String actionName() { return "View Organizations";}},
         new MenuAction() { public void action() { viewAttendance(); } public String actionName() { return "View Attendance";} },
         new MenuAction() { public void action() { viewTranscript(); } public String actionName() { return "View Transcript";} },
@@ -37,15 +39,22 @@ public class Student extends User {
         new MenuAction() { public void action() { openLibrary(); } public String actionName() { return "Open Library";} },
         new MenuAction() { public void action() { changePassword() ; } public String actionName() { return "Change password";} },
         new MenuAction() { public void action() { logout(); } public String actionName() { return "Logout";} },
+        
+        
     };
     
     {	
+    	takenCourses = new Vector<Vector<Course>>();
 //    	takingCourses.add(new Course("OOP"));
 //    	marks.put(takingCourses.firstElement(), new Mark());
 //    	marks.get(takingCourses.firstElement()).putMark(12, Mark.attestations.elementAt(0));
     }
     public Student() {
     	
+    }
+    
+    public Student(int id) {
+    	this.setId(id);
     }
     
     public Student(int id, String name) {
@@ -127,10 +136,47 @@ public class Student extends User {
     	
     }
     public void registerForCourse() {
-    
+    	if(!UniSystem.db.isRegOpen()) {
+    		System.out.println("Registration is not open yet");
+    	}
+    	Integer credits = 0;
+    	int maxCredits = 21;
+    	System.out.println("OK, there are available courses, you can maximum have = " + maxCredits + " credits");
+    	Vector<Course> courses = Course.getCourseOf(faculty, this);
+    	Course.showCourses(courses);
+     	boolean ok = true;
+     	while(ok) {
+     		System.out.println("OK, now choose one by one of courses you want to take, type -1 if you want to finish");
+    		int index = Integer.parseInt(scan());
+    		if(index == -1) {
+    			if(takingCourses.isEmpty()) {
+    				System.out.println("You can't finish with 0 courses");
+    			}
+    			else ok = false; 
+    		}
+    		else if(index >= 0 && index < courses.size()) {
+    			Course course = courses.elementAt(index);
+    			if(course.getNumOfCredits() + credits <= maxCredits && !takingCourses.contains(course)) {
+    				takingCourses.add(course);
+    				course.students.add(this);
+    				System.out.println("OK, added course = " + course);
+    				credits = credits + course.getNumOfCredits();
+    				System.out.println("You have " + (maxCredits-credits) + " more credits");
+    			}
+    			else {
+    				System.out.println("You can't pick this course");
+    			}
+    		}
+    		else {
+    			System.out.println("You missed bro");
+    		}
+     	}
+     	System.out.println("Congrats, you succesfully registrated to the courses:");
+     	Course.showCourses(takingCourses);
+    	viewMenu();
     }
     
-    
+   
     public void openLibrary() {
     	
     }
@@ -176,6 +222,9 @@ public class Student extends User {
     
     
     //get,set
+    public int getSemester() {
+    	return semester;
+    }
     public HashMap<Course, Mark> getMarks() {
     	return marks;
     }
@@ -186,16 +235,16 @@ public class Student extends User {
         this.faculty = faculty;
     }
     public Date getYearOfPostuplenye() {
-        return yearOfPostuplenye;
+        return yearOfEnrollment;
     }
-    public void setYearOfPostuplenye(Date yearOfPostuplenye) {
-        this.yearOfPostuplenye = yearOfPostuplenye;
+    public void setYearOfPostuplenye(Date yearOfEnrollment) {
+        this.yearOfEnrollment = yearOfEnrollment;
     }
     public double getFeeUchebny() {
-        return feeUchebny;
+        return fee;
     }
-    public void setFeeUchebny(double feeUchebny) {
-        this.feeUchebny = feeUchebny;
+    public void setFeeUchebny(double fee) {
+        this.fee = fee;
     }
     public double getGpa() {
         return gpa;
@@ -209,23 +258,11 @@ public class Student extends User {
     public void setTakingCourses(Vector<Course> takingCourses) {
         this.takingCourses = takingCourses;
     }
-    public Vector<Book> getBooks() {
-        return books;
-    }
-    public void setBooks(Vector<Book> books) {
-        this.books = books;
-    }
     public Vector<Book> getTakenBooks() {
         return takenBooks;
     }
     public void setTakenBooks(Vector<Book> takenBooks) {
         this.takenBooks = takenBooks;
-    }
-    public List<LibrarySubscription> getLibrarySubscriptions() {
-        return librarySubscriptions;
-    }
-    public void setLibrarySubscriptions(List<LibrarySubscription> librarySubscriptions) {
-        this.librarySubscriptions = librarySubscriptions;
     }
 
 	@Override
@@ -238,8 +275,8 @@ public class Student extends User {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + Arrays.hashCode(menu);
-		result = prime * result + Objects.hash(books, faculty, feeUchebny, gpa, librarySubscriptions, marks,
-				takenBooks, takingCourses, yearOfPostuplenye);
+		result = prime * result + Objects.hash(faculty, fee, gpa, marks,
+				takenBooks, takingCourses, yearOfEnrollment);
 		return result;
 	}
 

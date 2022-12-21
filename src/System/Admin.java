@@ -4,6 +4,7 @@ import java.util.Stack;
 import java.util.Arrays;
 import java.util.Date;
 import Employees.Employee;
+import Employees.Teacher;
 import Interfaces.MenuAction;
 import Main.Student;
 import Main.User;
@@ -46,7 +47,8 @@ public class Admin extends Employee {
     			UniSystem.db.users.add(requests.peek());
     			UniSystem.db.passwordByLogin.put(requests.peek().getLogin(),requests.peek().getPassword());
     			UniSystem.db.userByLogin.put(requests.peek().getLogin(), requests.peek());
-    			if(requests.peek().getClass() == (new Student()).getClass()) UniSystem.db.users.add(requests.peek());
+    			if(requests.peek().getClass() == (new Student()).getClass()) UniSystem.db.students.add((Student) requests.peek());
+    			if(requests.peek().getClass() == (new Teacher()).getClass()) UniSystem.db.teachers.add((Teacher) requests.peek());
     		}
     		requests.pop();
     	}

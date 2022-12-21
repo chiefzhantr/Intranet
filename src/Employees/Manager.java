@@ -152,7 +152,23 @@ public class Manager extends Employee {
     	
     	else if(type.equals("4")) {
     		Employee employee = getEmployee();
-			UniSystem.db.requests.add(new Teacher(employee));
+    		Faculty teacherFaculty;
+    		while(true) {
+    			System.out.println("OK, what's the teacher's faculty");
+    			int i = 0;
+    			for(Faculty faculty : UniSystem.db.faculties) {
+    				System.out.println(i+") "+ faculty);
+    				i++;
+    			}
+    			int ans = Integer.parseInt(scan());
+    			if(ans >= 0 && ans < UniSystem.db.faculties.size()-1) {
+    				teacherFaculty = UniSystem.db.faculties.elementAt(ans);
+    				break;
+    			} else {
+    				System.out.println("You missed");
+    			}
+    		}
+			UniSystem.db.requests.add(new Teacher(employee,teacherFaculty));
 		}
     	
     	else if(type.equals("5")) {
@@ -176,14 +192,78 @@ public class Manager extends Employee {
     }
 
     public void viewTeachers() {
-    }
-
-    public void staticReport() {
-    }
-    
-    public void manageCourses() {
     	
     }
+    
+    // репорты по тичерам, rate teachers
+    public void staticReport() {
+    	
+    }
+    
+    
+    //courses
+    public void manageCourses() {
+    	System.out.println("OK, choose option:\n1) Start course registration for the semester\n2) Assign teacher to the course \n3) Close course registration for the semester");
+    	String option = scan();
+    	if(option.equals("1")) {
+    		System.out.println("OK, opening the registration");
+    		UniSystem.db.registrationAvailable = true;
+    	} else if(option.equals("2")) {
+    		System.out.println("OK, type id of the teacher"); 
+    		
+    		int id; 
+    		while(true) {
+        		id = Integer.parseInt(scan());
+        		if(UniSystem.db.teachers.contains(new User(id)))
+        			break;
+        		else 
+        			System.out.println("No such user");
+        	}
+    		
+    		Teacher teacher = UniSystem.db.teachers.elementAt((UniSystem.db.teachers.indexOf(new Teacher(id))));
+    		
+    		System.out.println("OK, type the id of the course you want to assign");
+    		Course.showAllCourses();
+    		int courseId; 
+    		while(true) {
+    			courseId = Integer.parseInt(scan());
+    			if(courseId == -1) {
+    				viewMenu();
+    				return;
+    			}
+//    			if(UniSystem.db.courses.get(courseId) != null) {
+//    				System.out.println(UniSystem.db.courses.get(courseId).getFaculty() == teacher.getFaculty());
+//    				System.out.println(UniSystem.db.courses.get(courseId).getFaculty());
+//    				System.out.println(teacher.getFaculty());
+//    				break;
+//    			}
+        		if(UniSystem.db.courses.get(courseId) != null && UniSystem.db.courses.get(courseId).getFaculty() == teacher.getFaculty())
+        			break;
+        		else {
+        			System.out.println("No such course, type -1 to quit");
+        		}
+        	}
+    		System.out.println("Success");
+    		teacher.addCourse(UniSystem.db.courses.get(courseId)); 
+    		
+    	} else if(option.equals("3")) {
+    		System.out.println("OK, closing the registration");
+    		UniSystem.db.registrationAvailable = false;
+    	} else {
+    		System.out.println("You missed");
+    	}
+    	viewMenu();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     public void viewMenu() {
     	int option;

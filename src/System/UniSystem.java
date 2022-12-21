@@ -15,7 +15,6 @@ public class UniSystem {
 	
 	static {
 		db = DataBase.getDataBase();
-		db.initialize();
 	}
 	
 	public void run() {
@@ -52,6 +51,12 @@ public class UniSystem {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public void showUsers() {
+		for(User user : db.users) {
+			System.out.println(user);
 		}
 	}
 }

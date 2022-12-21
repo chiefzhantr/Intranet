@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -17,6 +18,8 @@ import java.util.stream.Collectors;
 import Employees.Employee;
 import Employees.Librarian;
 import Main.Book;
+import Main.Course;
+import Main.CourseType;
 import Main.Faculty;
 import Main.New;
 import Main.Student;
@@ -24,21 +27,31 @@ import Main.User;
 
 public class Tester {
 	
+	
 	public static void main(String[] args) throws IOException {
 		UniSystem uni = new UniSystem();
 		uni.deserialize();
+//		uni.db.initialize();
 		uni.run();
-//		System.out.println(uni.db);
-//		uni.deserialize();
-//		System.out.println(uni.db);
-//		UniSystem.db.users.add(new Librarian(1,"1"));
-//		List<User> employees = UniSystem.db.users.stream().filter(u -> u instanceof Employee).collect(Collectors.toList());
 
-		
-		
-		
 	}
 }
 
+
+
+
+
 //z_svanov@kbtu.kz
 //zhantore2004
+
+
+//int id, String nameOfCourse, int numOfCredits, 
+//Vector<Course> prerequisites, Faculty faculty, CourseType courseType, int capacity
+
+
+
+//System.out.println(uni.db);
+//uni.deserialize();
+//System.out.println(uni.db);
+//UniSystem.db.users.add(new Librarian(1,"1"));
+//List<User> employees = UniSystem.db.users.stream().filter(u -> u instanceof Employee).collect(Collectors.toList());
