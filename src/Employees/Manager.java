@@ -254,6 +254,22 @@ public class Manager extends Employee {
     	}
     	viewMenu();
     }
+	
+	public New manageNews() {
+try {
+ BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+ System.out.println("[INFO] Title: ");
+ String title = input.readLine();
+ //TODO поменять Date на LocalDate <-> Date publishDate;
+ return new New(title, LocalDate.now());
+}
+catch(IOException ioe) {
+ System.out.println("[INFO] Error...");
+} catch (IOException e) {
+ throw new RuntimeException(e);
+}
+return null;
+  }
     
     
     
