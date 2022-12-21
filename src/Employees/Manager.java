@@ -272,13 +272,19 @@ return null;
   }
     
     
-    
-    
-    
-    
-    
-    
-    
+    public void viewStudents() {
+ System.out.println("Students list: ");
+ for(Student st: students){
+  System.out.println(st);
+ }
+}
+
+  public void viewTeachers() {
+System.out.println("Teachers list: ");
+for (Teacher t: teachers) {
+ System.out.println(t);
+}
+  }
     
     
     public void viewMenu() {
